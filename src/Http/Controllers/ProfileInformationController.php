@@ -19,8 +19,7 @@ class ProfileInformationController extends Controller
     public function update(
         Request $request,
         UpdatesUserProfileInformation $updater
-    )
-    {
+    ) {
         $updater->update($request->user(config('admin_fortify.guard')), $request->all());
 
         return $request->wantsJson()
