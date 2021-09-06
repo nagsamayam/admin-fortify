@@ -3,8 +3,8 @@
 namespace NagSamayam\AdminFortify\Actions;
 
 use Illuminate\Auth\Events\Lockout;
-use NagSamayam\AdminFortify\LoginRateLimiter;
 use NagSamayam\AdminFortify\Contracts\LockoutResponse;
+use NagSamayam\AdminFortify\LoginRateLimiter;
 
 class EnsureLoginIsNotThrottled
 {
@@ -21,7 +21,7 @@ class EnsureLoginIsNotThrottled
      */
     public function handle($request, $next)
     {
-        if (!$this->limiter->tooManyAttempts($request)) {
+        if (! $this->limiter->tooManyAttempts($request)) {
             return $next($request);
         }
 

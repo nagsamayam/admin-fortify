@@ -2,13 +2,13 @@
 
 namespace NagSamayam\AdminFortify\Http\Controllers;
 
+use Illuminate\Contracts\Auth\StatefulGuard;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Illuminate\Contracts\Auth\StatefulGuard;
-use NagSamayam\AdminFortify\Contracts\TwoFactorLoginResponse;
-use NagSamayam\AdminFortify\Http\Requests\TwoFactorLoginRequest;
 use NagSamayam\AdminFortify\Contracts\FailedTwoFactorLoginResponse;
 use NagSamayam\AdminFortify\Contracts\TwoFactorChallengeViewResponse;
+use NagSamayam\AdminFortify\Contracts\TwoFactorLoginResponse;
+use NagSamayam\AdminFortify\Http\Requests\TwoFactorLoginRequest;
 
 class TwoFactorAuthenticatedSessionController extends Controller
 {
@@ -37,7 +37,7 @@ class TwoFactorAuthenticatedSessionController extends Controller
     {
         $user = $request->challengedUser();
 
-        if (!$request->hasValidCode()) {
+        if (! $request->hasValidCode()) {
             return app(FailedTwoFactorLoginResponse::class);
         }
 

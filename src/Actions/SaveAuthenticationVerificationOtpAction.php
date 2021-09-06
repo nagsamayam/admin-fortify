@@ -7,7 +7,6 @@ use NagSamayam\AdminFortify\TwoFactorAuthenticationProvider;
 
 class SaveAuthenticationVerificationOtpAction
 {
-
     public function __construct(protected TwoFactorAuthenticationProvider $provider)
     {
     }

@@ -2,7 +2,6 @@
 
 namespace NagSamayam\AdminFortify\Tests;
 
-
 class ExampleTest extends TestCase
 {
     /** @test */

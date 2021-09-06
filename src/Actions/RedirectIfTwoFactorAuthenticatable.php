@@ -3,16 +3,15 @@
 namespace NagSamayam\AdminFortify\Actions;
 
 use Illuminate\Auth\Events\Failed;
-use Illuminate\Support\Facades\Hash;
-use NagSamayam\AdminFortify\Fortify;
 use Illuminate\Contracts\Auth\StatefulGuard;
-use NagSamayam\AdminFortify\LoginRateLimiter;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
+use NagSamayam\AdminFortify\Fortify;
+use NagSamayam\AdminFortify\LoginRateLimiter;
 use NagSamayam\AdminFortify\TwoFactorAuthenticatable;
 
 class RedirectIfTwoFactorAuthenticatable
 {
-
     public function __construct(protected StatefulGuard $guard, protected LoginRateLimiter $limiter)
     {
     }
@@ -50,7 +49,7 @@ class RedirectIfTwoFactorAuthenticatable
     {
         if (Fortify::$authenticateUsingCallback) {
             return tap(call_user_func(Fortify::$authenticateUsingCallback, $request), function ($user) use ($request) {
-                if (!$user) {
+                if (! $user) {
                     $this->fireFailedEvent($request);
 
                     $this->throwFailedAuthenticationException($request);
@@ -61,7 +60,7 @@ class RedirectIfTwoFactorAuthenticatable
         $model = $this->guard->getProvider()->getModel();
 
         return tap($model::where(Fortify::username(), $request->{Fortify::username()})->first(), function ($user) use ($request) {
-            if (!$user || !Hash::check($request->password, $user->password)) {
+            if (! $user || ! Hash::check($request->password, $user->password)) {
                 $this->fireFailedEvent($request, $user);
 
                 $this->throwFailedAuthenticationException($request);

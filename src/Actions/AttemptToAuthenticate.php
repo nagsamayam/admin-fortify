@@ -3,11 +3,11 @@
 namespace NagSamayam\AdminFortify\Actions;
 
 use Illuminate\Auth\Events\Failed;
-use NagSamayam\AdminFortify\Fortify;
-use NagSamayam\AdminFortify\Events\Login;
 use Illuminate\Contracts\Auth\StatefulGuard;
-use NagSamayam\AdminFortify\LoginRateLimiter;
 use Illuminate\Validation\ValidationException;
+use NagSamayam\AdminFortify\Events\Login;
+use NagSamayam\AdminFortify\Fortify;
+use NagSamayam\AdminFortify\LoginRateLimiter;
 
 class AttemptToAuthenticate
 {
@@ -51,7 +51,7 @@ class AttemptToAuthenticate
     {
         $user = call_user_func(Fortify::$authenticateUsingCallback, $request);
 
-        if (!$user) {
+        if (! $user) {
             $this->fireFailedEvent($request);
 
             return $this->throwFailedAuthenticationException($request);

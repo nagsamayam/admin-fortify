@@ -3,10 +3,10 @@
 namespace NagSamayam\AdminFortify\Http\Responses;
 
 use Illuminate\Http\Response;
-use NagSamayam\AdminFortify\Fortify;
-use NagSamayam\AdminFortify\LoginRateLimiter;
 use Illuminate\Validation\ValidationException;
 use NagSamayam\AdminFortify\Contracts\LockoutResponse as LockoutResponseContract;
+use NagSamayam\AdminFortify\Fortify;
+use NagSamayam\AdminFortify\LoginRateLimiter;
 
 class LockoutResponse implements LockoutResponseContract
 {

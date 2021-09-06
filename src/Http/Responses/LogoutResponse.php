@@ -3,9 +3,9 @@
 namespace NagSamayam\AdminFortify\Http\Responses;
 
 use Illuminate\Http\JsonResponse;
+use NagSamayam\AdminFortify\Contracts\LogoutResponse as LogoutResponseContract;
 use NagSamayam\AdminFortify\Fortify;
 use Symfony\Component\HttpFoundation\Response;
-use NagSamayam\AdminFortify\Contracts\LogoutResponse as LogoutResponseContract;
 
 class LogoutResponse implements LogoutResponseContract
 {

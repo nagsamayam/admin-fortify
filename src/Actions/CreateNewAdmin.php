@@ -2,11 +2,11 @@
 
 namespace NagSamayam\AdminFortify\Actions;
 
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
-use NagSamayam\AdminFortify\Models\Admin;
+use Illuminate\Support\Str;
 use NagSamayam\AdminFortify\Dtos\CreateNewAdminData;
 use NagSamayam\AdminFortify\Jobs\SendWelcomeNotice;
+use NagSamayam\AdminFortify\Models\Admin;
 
 class CreateNewAdmin
 {

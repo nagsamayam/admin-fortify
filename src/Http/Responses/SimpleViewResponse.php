@@ -3,8 +3,8 @@
 namespace NagSamayam\AdminFortify\Http\Responses;
 
 use Illuminate\Contracts\Support\Responsable;
-use NagSamayam\AdminFortify\Contracts\LoginViewResponse;
 use NagSamayam\AdminFortify\Contracts\ConfirmPasswordViewResponse;
+use NagSamayam\AdminFortify\Contracts\LoginViewResponse;
 use NagSamayam\AdminFortify\Contracts\TwoFactorChallengeViewResponse;
 
 class SimpleViewResponse implements

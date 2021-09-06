@@ -2,12 +2,11 @@
 
 namespace NagSamayam\AdminFortify\Actions;
 
-use NagSamayam\AdminFortify\Models\Admin;
 use NagSamayam\AdminFortify\Jobs\SendAuthenticationVerificationOtp;
+use NagSamayam\AdminFortify\Models\Admin;
 
 class SendAuthenticationVerificationOtpAction
 {
-
     public function __construct(
         private SaveAuthenticationVerificationOtpAction $saveAuthenticationVerificationOtpAction,
     ) {

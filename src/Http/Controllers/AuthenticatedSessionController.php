@@ -2,20 +2,20 @@
 
 namespace NagSamayam\AdminFortify\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Routing\Pipeline;
-use Illuminate\Routing\Controller;
-use NagSamayam\AdminFortify\Fortify;
-use NagSamayam\AdminFortify\Features;
 use Illuminate\Contracts\Auth\StatefulGuard;
-use NagSamayam\AdminFortify\Contracts\LoginResponse;
-use NagSamayam\AdminFortify\Contracts\LogoutResponse;
-use NagSamayam\AdminFortify\Http\Requests\LoginRequest;
-use NagSamayam\AdminFortify\Contracts\LoginViewResponse;
+use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
+use Illuminate\Routing\Pipeline;
 use NagSamayam\AdminFortify\Actions\AttemptToAuthenticate;
 use NagSamayam\AdminFortify\Actions\EnsureLoginIsNotThrottled;
 use NagSamayam\AdminFortify\Actions\PrepareAuthenticatedSession;
 use NagSamayam\AdminFortify\Actions\RedirectIfTwoFactorAuthenticatable;
+use NagSamayam\AdminFortify\Contracts\LoginResponse;
+use NagSamayam\AdminFortify\Contracts\LoginViewResponse;
+use NagSamayam\AdminFortify\Contracts\LogoutResponse;
+use NagSamayam\AdminFortify\Features;
+use NagSamayam\AdminFortify\Fortify;
+use NagSamayam\AdminFortify\Http\Requests\LoginRequest;
 
 class AuthenticatedSessionController extends Controller
 {

@@ -2,9 +2,9 @@
 
 namespace NagSamayam\AdminFortify;
 
-use Illuminate\Support\Str;
-use Illuminate\Http\Request;
 use Illuminate\Cache\RateLimiter;
+use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class LoginRateLimiter
 {

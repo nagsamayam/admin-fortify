@@ -2,8 +2,8 @@
 
 namespace NagSamayam\AdminFortify\Http\Responses;
 
-use Illuminate\Http\Response;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Response;
 use NagSamayam\AdminFortify\Contracts\PasswordConfirmedResponse as PasswordConfirmedResponseContract;
 
 class PasswordConfirmedResponse implements PasswordConfirmedResponseContract

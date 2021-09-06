@@ -2,9 +2,9 @@
 
 namespace NagSamayam\AdminFortify\Http\Responses;
 
-use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Validation\ValidationException;
 use NagSamayam\AdminFortify\Contracts\FailedPasswordConfirmationResponse as FailedPasswordConfirmationResponseContract;
+use Symfony\Component\HttpFoundation\Response;
 
 class FailedPasswordConfirmationResponse implements FailedPasswordConfirmationResponseContract
 {

@@ -2,8 +2,8 @@
 
 namespace NagSamayam\AdminFortify\Actions;
 
-use NagSamayam\AdminFortify\Fortify;
 use Illuminate\Contracts\Auth\StatefulGuard;
+use NagSamayam\AdminFortify\Fortify;
 
 class ConfirmPassword
 {

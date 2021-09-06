@@ -3,8 +3,8 @@
 namespace NagSamayam\AdminFortify\Http\Responses;
 
 use Illuminate\Http\JsonResponse;
-use NagSamayam\AdminFortify\Fortify;
 use NagSamayam\AdminFortify\Contracts\TwoFactorLoginResponse as TwoFactorLoginResponseContract;
+use NagSamayam\AdminFortify\Fortify;
 
 class TwoFactorLoginResponse implements TwoFactorLoginResponseContract
 {

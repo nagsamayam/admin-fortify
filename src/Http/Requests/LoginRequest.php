@@ -2,8 +2,8 @@
 
 namespace NagSamayam\AdminFortify\Http\Requests;
 
-use NagSamayam\AdminFortify\Fortify;
 use Illuminate\Foundation\Http\FormRequest;
+use NagSamayam\AdminFortify\Fortify;
 
 class LoginRequest extends FormRequest
 {
