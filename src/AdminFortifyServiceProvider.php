@@ -104,7 +104,7 @@ class AdminFortifyServiceProvider extends ServiceProvider
      */
     protected function configurePublishing()
     {
-        if (! $this->app->runningInConsole()) {
+        if (!$this->app->runningInConsole()) {
             return;
         }
 
@@ -112,7 +112,7 @@ class AdminFortifyServiceProvider extends ServiceProvider
             __DIR__ . '/../config/fortify.php' => config_path('admin_fortify.php'),
         ], 'admin-fortify-config');
 
-        if (! class_exists('CreateAdminsTable')) {
+        if (!class_exists('CreateAdminsTable')) {
             $this->publishes([
                 __DIR__ . '/../database/migrations/create_admins_table.php.stub' => database_path('migrations/' . date('Y_m_d_His', time()) . '_create_admins_table.php'),
             ], 'admin-fortify-migrations');
@@ -122,6 +122,12 @@ class AdminFortifyServiceProvider extends ServiceProvider
             $this->publishes([
                 __DIR__ . '/../database/migrations/create_admin_login_log_table.php.stub' => database_path('migrations/' . date('Y_m_d_His', time()) . '_create_admin_login_log_table.php'),
             ], 'admin-fortify-migrations');
+        }
+
+        if (!class_exists('SuperAdminSeeder')) {
+            $this->publishes([
+                __DIR__ . '/../database/seeders/SuperAdminSeeder.php.stub' => database_path('seeders/SuperAdminSeeder.php'),
+            ], 'admin-fortify-seeders');
         }
     }
 

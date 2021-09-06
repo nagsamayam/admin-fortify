@@ -6,24 +6,11 @@
 [![Total Downloads](https://img.shields.io/packagist/dt/nagsamayam/admin-fortify.svg?style=flat-square)](https://packagist.org/packages/nagsamayam/admin-fortify)
 
 ---
-This repo can be used to scaffold a Laravel package. Follow these steps to get started:
-
-1. Press the "Use template" button at the top of this repo to create a new repo with the contents of this skeleton
-2. Run "php ./configure.php" to run a script that will replace all placeholders throughout all the files
-3. Remove this block of text.
-4. Have fun creating your package.
-5. If you need help creating a package, consider picking up our <a href="https://laravelpackage.training">Laravel Package Training</a> video course.
+This repo can be used as admin Fortify.
 ---
 
 This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
 
-## Support us
-
-[<img src="https://github-ads.s3.eu-central-1.amazonaws.com/admin-fortify.jpg?t=1" width="419px" />](https://spatie.be/github-ad-click/admin-fortify)
-
-We invest a lot of resources into creating [best in class open source packages](https://spatie.be/open-source). You can support us by [buying one of our paid products](https://spatie.be/open-source/support-us).
-
-We highly appreciate you sending us a postcard from your hometown, mentioning which of our package(s) you are using. You'll find our address on [our contact page](https://spatie.be/about-us). We publish all received postcards on [our virtual postcard wall](https://spatie.be/open-source/postcards).
 
 ## Installation
 
@@ -36,13 +23,18 @@ composer require nagsamayam/admin-fortify
 You can publish and run the migrations with:
 
 ```bash
-php artisan vendor:publish --provider="NagSamayam\AdminFortify\AdminFortifyServiceProvider" --tag="package_slug-migrations"
+php artisan vendor:publish --provider="NagSamayam\AdminFortify\AdminFortifyServiceProvider" --tag="admin-fortify-migrations"
 php artisan migrate
+```
+
+You can publish the DB seeder file with:
+```bash
+php artisan vendor:publish --provider="NagSamayam\AdminFortify\AdminFortifyServiceProvider" --tag="admin-fortify-seeders"
 ```
 
 You can publish the config file with:
 ```bash
-php artisan vendor:publish --provider="NagSamayam\AdminFortify\AdminFortifyServiceProvider" --tag="package_slug-config"
+php artisan vendor:publish --provider="NagSamayam\AdminFortify\AdminFortifyServiceProvider" --tag="admin-fortify-config"
 ```
 
 This is the contents of the published config file:
@@ -52,12 +44,8 @@ return [
 ];
 ```
 
-## Usage
+## Usage(Will be added soon)
 
-```php
-$skeleton = new NagSamayam\AdminFortify();
-echo $skeleton->echoPhrase('Hello, Spatie!');
-```
 
 ## Testing
 
