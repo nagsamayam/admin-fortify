@@ -2,13 +2,13 @@
 
 namespace NagSamayam\AdminFortify\Models;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use NagSamayam\AdminFortify\TwoFactorAuthenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Notifications\Notifiable;
+use NagSamayam\AdminFortify\TwoFactorAuthenticatable;
 
 class Admin extends Model
 {
@@ -74,7 +74,7 @@ class Admin extends Model
 
     public function is2faEnabled(): bool
     {
-        return !is_null($this->two_factor_enabled_at);
+        return ! is_null($this->two_factor_enabled_at);
     }
 
     public function enabledNofifyOnLogin(): bool
@@ -84,7 +84,7 @@ class Admin extends Model
 
     public function isBanned(): bool
     {
-        return !is_null($this->banned_at);
+        return ! is_null($this->banned_at);
     }
 
     public function isBlocked(): bool

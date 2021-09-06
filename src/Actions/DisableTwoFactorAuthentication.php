@@ -6,7 +6,6 @@ use NagSamayam\AdminFortify\Models\Admin;
 
 class DisableTwoFactorAuthentication
 {
-
     public function __invoke(Admin $admin)
     {
         $admin->forceFill([

@@ -2,8 +2,8 @@
 
 namespace NagSamayam\AdminFortify\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Auth\StatefulGuard;
+use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use NagSamayam\AdminFortify\Contracts\FailedTwoFactorLoginResponse;
 use NagSamayam\AdminFortify\Contracts\TwoFactorAuthenticationProvider;
@@ -85,8 +85,8 @@ class TwoFactorLoginRequest extends FormRequest
         $model = app(StatefulGuard::class)->getProvider()->getModel();
 
         if (
-            !$this->session()->has('admin_login.id') ||
-            !$user = $model::find($this->session()->pull('admin_login.id'))
+            ! $this->session()->has('admin_login.id') ||
+            ! $user = $model::find($this->session()->pull('admin_login.id'))
         ) {
             throw new HttpResponseException(
                 app(FailedTwoFactorLoginResponse::class)->toResponse($this)
@@ -103,7 +103,7 @@ class TwoFactorLoginRequest extends FormRequest
      */
     public function remember()
     {
-        if (!$this->remember) {
+        if (! $this->remember) {
             $this->remember = $this->session()->pull('admin_login.remember', false);
         }
 

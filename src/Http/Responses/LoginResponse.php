@@ -2,9 +2,9 @@
 
 namespace NagSamayam\AdminFortify\Http\Responses;
 
+use NagSamayam\AdminFortify\Contracts\LoginResponse as LoginResponseContract;
 use NagSamayam\AdminFortify\Fortify;
 use Symfony\Component\HttpFoundation\Response;
-use NagSamayam\AdminFortify\Contracts\LoginResponse as LoginResponseContract;
 
 class LoginResponse implements LoginResponseContract
 {

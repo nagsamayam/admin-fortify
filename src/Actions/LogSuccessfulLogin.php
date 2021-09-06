@@ -2,8 +2,8 @@
 
 namespace NagSamayam\AdminFortify\Actions;
 
-use NagSamayam\AdminFortify\Models\Admin;
 use NagSamayam\AdminFortify\Dtos\LoginLogData;
+use NagSamayam\AdminFortify\Models\Admin;
 
 class LogSuccessfulLogin
 {

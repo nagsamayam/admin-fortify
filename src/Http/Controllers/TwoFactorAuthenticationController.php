@@ -2,11 +2,11 @@
 
 namespace NagSamayam\AdminFortify\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use NagSamayam\AdminFortify\Actions\EnableTwoFactorAuthentication;
 use NagSamayam\AdminFortify\Actions\DisableTwoFactorAuthentication;
+use NagSamayam\AdminFortify\Actions\EnableTwoFactorAuthentication;
 
 class TwoFactorAuthenticationController extends Controller
 {

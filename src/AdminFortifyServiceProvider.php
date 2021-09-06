@@ -2,34 +2,34 @@
 
 namespace NagSamayam\AdminFortify;
 
+use Illuminate\Contracts\Auth\StatefulGuard;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Contracts\Auth\StatefulGuard;
-use NagSamayam\AdminFortify\Commands\AdminFortifyCommand;
-use NagSamayam\AdminFortify\Http\Responses\LoginResponse;
 use NagSamayam\AdminFortify\Actions\AttemptToAuthenticate;
-use NagSamayam\AdminFortify\Http\Responses\LogoutResponse;
-use NagSamayam\AdminFortify\Http\Responses\LockoutResponse;
-use NagSamayam\AdminFortify\Providers\EventServiceProvider;
-use NagSamayam\AdminFortify\Http\Middleware\AdminAuthenticate;
-use NagSamayam\AdminFortify\Http\Responses\TwoFactorLoginResponse;
-use NagSamayam\AdminFortify\Http\Responses\PasswordConfirmedResponse;
 use NagSamayam\AdminFortify\Actions\RedirectIfTwoFactorAuthenticatable;
-use NagSamayam\AdminFortify\Http\Responses\FailedTwoFactorLoginResponse;
-use NagSamayam\AdminFortify\Http\Middleware\RedirectIfAdminAuthenticated;
-use NagSamayam\AdminFortify\Http\Controllers\AuthenticatedSessionController;
-use NagSamayam\AdminFortify\Contracts\LoginResponse as LoginResponseContract;
-use NagSamayam\AdminFortify\Http\Responses\FailedPasswordConfirmationResponse;
-use NagSamayam\AdminFortify\Contracts\LogoutResponse as LogoutResponseContract;
-use NagSamayam\AdminFortify\Contracts\LockoutResponse as LockoutResponseContract;
-use NagSamayam\AdminFortify\Http\Controllers\TwoFactorAuthenticatedSessionController;
-use NagSamayam\AdminFortify\Contracts\TwoFactorLoginResponse as TwoFactorLoginResponseContract;
-use NagSamayam\AdminFortify\Contracts\PasswordConfirmedResponse as PasswordConfirmedResponseContract;
-use NagSamayam\AdminFortify\Contracts\FailedTwoFactorLoginResponse as FailedTwoFactorLoginResponseContract;
-use NagSamayam\AdminFortify\Contracts\TwoFactorAuthenticationProvider as TwoFactorAuthenticationProviderContract;
+use NagSamayam\AdminFortify\Commands\AdminFortifyCommand;
 use NagSamayam\AdminFortify\Contracts\FailedPasswordConfirmationResponse as FailedPasswordConfirmationResponseContract;
+use NagSamayam\AdminFortify\Contracts\FailedTwoFactorLoginResponse as FailedTwoFactorLoginResponseContract;
+use NagSamayam\AdminFortify\Contracts\LockoutResponse as LockoutResponseContract;
+use NagSamayam\AdminFortify\Contracts\LoginResponse as LoginResponseContract;
+use NagSamayam\AdminFortify\Contracts\LogoutResponse as LogoutResponseContract;
+use NagSamayam\AdminFortify\Contracts\PasswordConfirmedResponse as PasswordConfirmedResponseContract;
+use NagSamayam\AdminFortify\Contracts\TwoFactorAuthenticationProvider as TwoFactorAuthenticationProviderContract;
+use NagSamayam\AdminFortify\Contracts\TwoFactorLoginResponse as TwoFactorLoginResponseContract;
+use NagSamayam\AdminFortify\Http\Controllers\AuthenticatedSessionController;
+use NagSamayam\AdminFortify\Http\Controllers\TwoFactorAuthenticatedSessionController;
+use NagSamayam\AdminFortify\Http\Middleware\AdminAuthenticate;
+use NagSamayam\AdminFortify\Http\Middleware\RedirectIfAdminAuthenticated;
+use NagSamayam\AdminFortify\Http\Responses\FailedPasswordConfirmationResponse;
+use NagSamayam\AdminFortify\Http\Responses\FailedTwoFactorLoginResponse;
+use NagSamayam\AdminFortify\Http\Responses\LockoutResponse;
+use NagSamayam\AdminFortify\Http\Responses\LoginResponse;
+use NagSamayam\AdminFortify\Http\Responses\LogoutResponse;
+use NagSamayam\AdminFortify\Http\Responses\PasswordConfirmedResponse;
+use NagSamayam\AdminFortify\Http\Responses\TwoFactorLoginResponse;
+use NagSamayam\AdminFortify\Providers\EventServiceProvider;
 
 class AdminFortifyServiceProvider extends ServiceProvider
 {
@@ -97,7 +97,6 @@ class AdminFortifyServiceProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'adminFortify');
     }
 
-
     /**
      * Configure the publishable resources offered by the package.
      *
@@ -105,7 +104,7 @@ class AdminFortifyServiceProvider extends ServiceProvider
      */
     protected function configurePublishing()
     {
-        if (!$this->app->runningInConsole()) {
+        if (! $this->app->runningInConsole()) {
             return;
         }
 
@@ -113,7 +112,7 @@ class AdminFortifyServiceProvider extends ServiceProvider
             __DIR__ . '/../config/fortify.php' => config_path('admin_fortify.php'),
         ], 'admin-fortify-config');
 
-        if (!class_exists('CreateAdminsTable')) {
+        if (! class_exists('CreateAdminsTable')) {
             $this->publishes([
                 __DIR__ . '/../database/migrations/create_admins_table.php.stub' => database_path('migrations/' . date('Y_m_d_His', time()) . '_create_admins_table.php'),
             ], 'admin-fortify-migrations');

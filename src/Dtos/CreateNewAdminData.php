@@ -13,7 +13,6 @@ class CreateNewAdminData extends DataTransferObject
 
     public ?string $password;
 
-
     public function withPassword(string $password): self
     {
         $clone = clone $this;

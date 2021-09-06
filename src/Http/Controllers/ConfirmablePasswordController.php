@@ -2,13 +2,13 @@
 
 namespace NagSamayam\AdminFortify\Http\Controllers;
 
+use Illuminate\Contracts\Auth\StatefulGuard;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Illuminate\Contracts\Auth\StatefulGuard;
 use NagSamayam\AdminFortify\Actions\ConfirmPassword;
-use NagSamayam\AdminFortify\Contracts\PasswordConfirmedResponse;
 use NagSamayam\AdminFortify\Contracts\ConfirmPasswordViewResponse;
 use NagSamayam\AdminFortify\Contracts\FailedPasswordConfirmationResponse;
+use NagSamayam\AdminFortify\Contracts\PasswordConfirmedResponse;
 
 class ConfirmablePasswordController extends Controller
 {
@@ -31,7 +31,7 @@ class ConfirmablePasswordController extends Controller
     }
 
     /**
-    
+
      * Show the confirm password view.
      *
      * @param  \Illuminate\Http\Request  $request

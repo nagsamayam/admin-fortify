@@ -2,12 +2,11 @@
 
 namespace NagSamayam\AdminFortify\Actions;
 
-use NagSamayam\AdminFortify\Models\Admin;
 use NagSamayam\AdminFortify\Contracts\TwoFactorAuthenticationProvider;
+use NagSamayam\AdminFortify\Models\Admin;
 
 class EnableTwoFactorAuthentication
 {
-
     public function __construct(protected TwoFactorAuthenticationProvider $provider)
     {
     }

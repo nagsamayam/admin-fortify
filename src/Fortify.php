@@ -2,12 +2,12 @@
 
 namespace NagSamayam\AdminFortify;
 
-use NagSamayam\AdminFortify\Contracts\LoginViewResponse;
-use NagSamayam\AdminFortify\Contracts\UpdatesUserPasswords;
-use NagSamayam\AdminFortify\Http\Responses\SimpleViewResponse;
 use NagSamayam\AdminFortify\Contracts\ConfirmPasswordViewResponse;
-use NagSamayam\AdminFortify\Contracts\UpdatesUserProfileInformation;
+use NagSamayam\AdminFortify\Contracts\LoginViewResponse;
 use NagSamayam\AdminFortify\Contracts\TwoFactorChallengeViewResponse;
+use NagSamayam\AdminFortify\Contracts\UpdatesUserPasswords;
+use NagSamayam\AdminFortify\Contracts\UpdatesUserProfileInformation;
+use NagSamayam\AdminFortify\Http\Responses\SimpleViewResponse;
 
 class Fortify
 {
@@ -208,6 +208,6 @@ class Fortify
     {
         static::$registersRoutes = false;
 
-        return new static;
+        return new static();
     }
 }

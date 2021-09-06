@@ -129,7 +129,7 @@ class Features
      */
     public static function twoFactorAuthentication(array $options = [])
     {
-        if (!empty($options)) {
+        if (! empty($options)) {
             config(['admin-fortify-options.two-factor-authentication' => $options]);
         }
 

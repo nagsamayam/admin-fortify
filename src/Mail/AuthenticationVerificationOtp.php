@@ -3,14 +3,15 @@
 namespace NagSamayam\AdminFortify\Mail;
 
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use NagSamayam\AdminFortify\Models\Admin;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
 class AuthenticationVerificationOtp extends Mailable implements ShouldQueue
 {
-    use Queueable, SerializesModels;
+    use Queueable;
+    use SerializesModels;
 
     /**
      * Create a new message instance.
