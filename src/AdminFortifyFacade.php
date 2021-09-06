@@ -1,13 +1,13 @@
 <?php
 
-namespace VendorName\Skeleton;
+namespace NagSamayam\AdminFortify;
 
 use Illuminate\Support\Facades\Facade;
 
 /**
- * @see \VendorName\Skeleton\Skeleton
+ * @see \NagSamayam\AdminFortify\AdminFortify
  */
-class SkeletonFacade extends Facade
+class AdminFortifyFacade extends Facade
 {
     protected static function getFacadeAccessor()
     {

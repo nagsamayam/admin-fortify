@@ -1,0 +1,33 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    public function up()
+    {
+        Schema::create('admins', function (Blueprint $table) {
+            $table->mediumIncrements('id');
+            $table->string('full_name');
+            $table->string('email', 150)->unique();
+            $table->string('password', 100);
+            $table->timestampTz('two_factor_enabled_at')->nullable();
+            $table->string('otp')->nullable();
+            $table->timestampTz('otp_sent_at')->nullable();
+            $table->boolean('notify_on_login')->default(false);
+            $table->string('timezone', 70)->default(config('app.timezone'));
+            $table->string('profile_photo_path', 2048)->nullable();
+            $table->rememberToken();
+            $table->timestampsTz();
+            $table->timestampTz('banned_at')->nullable();
+            $table->softDeletesTz();
+        });
+    }
+
+    public function down()
+    {
+        Schema::dropIfExists('admins');
+    }
+};
