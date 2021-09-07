@@ -118,7 +118,7 @@ class AdminFortifyServiceProvider extends ServiceProvider
             ], 'admin-fortify-migrations');
         }
 
-        if (!class_exists('CreateAdminLoginLogTable')) {
+        if (! class_exists('CreateAdminLoginLogTable')) {
             $this->publishes([
                 __DIR__ . '/../database/migrations/create_admin_login_log_table.php.stub' => database_path('migrations/' . date('Y_m_d_His', time()) . '_create_admin_login_log_table.php'),
             ], 'admin-fortify-migrations');

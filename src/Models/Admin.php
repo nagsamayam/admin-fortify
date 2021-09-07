@@ -80,7 +80,7 @@ class Admin extends Model
 
     public function is2faEnabled(): bool
     {
-        return !is_null($this->two_factor_enabled_at);
+        return ! is_null($this->two_factor_enabled_at);
     }
 
     public function enabledNofifyOnLogin(): bool
@@ -90,7 +90,7 @@ class Admin extends Model
 
     public function isBanned(): bool
     {
-        return !is_null($this->banned_at);
+        return ! is_null($this->banned_at);
     }
 
     public function isBlocked(): bool
