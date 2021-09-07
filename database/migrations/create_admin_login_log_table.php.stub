@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use NagSamayam\AdminFortify\Models\Admin;
 
-return new class extends Migration
+class CreateAdminLoginLog extends Migration
 {
     public function up()
     {
@@ -22,4 +22,4 @@ return new class extends Migration
     {
         Schema::dropIfExists('admin_login_log');
     }
-};
+}

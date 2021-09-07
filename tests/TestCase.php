@@ -35,8 +35,7 @@ class TestCase extends Orchestra
             'prefix' => '',
         ]);
 
-        $migration = include_once __DIR__ . '/../database/migrations/create_admins_table.php.stub';
-
-        $migration->up();
+        include_once __DIR__ . '/../database/migrations/create_admins_table.php.stub';
+        (new CreateAdminsTable())->up();
     }
 }
