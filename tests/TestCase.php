@@ -5,6 +5,7 @@ namespace NagSamayam\AdminFortify\Tests;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use NagSamayam\AdminFortify\AdminFortifyServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
+use CreateAdminsTable;
 
 class TestCase extends Orchestra
 {
@@ -26,22 +27,16 @@ class TestCase extends Orchestra
 
     public function getEnvironmentSetUp($app)
     {
-        config()->set('database.default', 'mysql');
+        $app['config']->set('database.default', 'sqlite');
 
-        config()->set('database.connections.mysql', [
-            'driver' => 'mysql',
-            'database' => 'admin_fortify_tests',
-            'host' => '127.0.0.1',
-            'username' => 'root',
-            'password' => env('DB_PASSWORD', ''),
+        $app['config']->set('database.connections.sqlite', [
+            'driver' => 'sqlite',
+            'database' => ':memory:',
             'prefix' => '',
-            'charset' => 'utf8mb4',
-            'collation' => 'utf8mb4_unicode_ci',
         ]);
 
-        /*
-        $migration = include __DIR__.'/../database/migrations/create_skeleton_table.php.stub';
+        $migration = include_once __DIR__ . '/../database/migrations/create_admins_table.php.stub';
+
         $migration->up();
-        */
     }
 }

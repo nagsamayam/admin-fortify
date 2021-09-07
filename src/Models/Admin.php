@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
+use NagSamayam\AdminFortify\Database\Factories\AdminFactory;
 use NagSamayam\AdminFortify\TwoFactorAuthenticatable;
 
 class Admin extends Model
@@ -31,6 +32,11 @@ class Admin extends Model
         'two_factor_enabled_at',
         'banned_at',
     ];
+
+    protected static function newFactory()
+    {
+        return AdminFactory::new();
+    }
 
     public function logins(): HasMany
     {
@@ -74,7 +80,7 @@ class Admin extends Model
 
     public function is2faEnabled(): bool
     {
-        return ! is_null($this->two_factor_enabled_at);
+        return !is_null($this->two_factor_enabled_at);
     }
 
     public function enabledNofifyOnLogin(): bool
@@ -84,7 +90,7 @@ class Admin extends Model
 
     public function isBanned(): bool
     {
-        return ! is_null($this->banned_at);
+        return !is_null($this->banned_at);
     }
 
     public function isBlocked(): bool
