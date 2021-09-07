@@ -5,7 +5,6 @@ namespace NagSamayam\AdminFortify\Tests;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use NagSamayam\AdminFortify\AdminFortifyServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
-use CreateAdminsTable;
 
 class TestCase extends Orchestra
 {
