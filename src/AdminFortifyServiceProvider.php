@@ -30,9 +30,15 @@ use NagSamayam\AdminFortify\Http\Responses\LogoutResponse;
 use NagSamayam\AdminFortify\Http\Responses\PasswordConfirmedResponse;
 use NagSamayam\AdminFortify\Http\Responses\TwoFactorLoginResponse;
 use NagSamayam\AdminFortify\Providers\EventServiceProvider;
+use Illuminate\Support\Str;
+use ReflectionClass;
 
 class AdminFortifyServiceProvider extends ServiceProvider
 {
+    public string $packageName;
+
+    public string $basePath;
+
     /**
      * Register any application services.
      *
@@ -40,6 +46,9 @@ class AdminFortifyServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $this->packageName = 'admin-fortify';
+        $this->setBasePath($this->getPackageBaseDir());
+
         $this->mergeConfigFrom(__DIR__ . '/../config/fortify.php', 'admin_fortify');
 
         $this->registerResponseBindings();
@@ -104,7 +113,7 @@ class AdminFortifyServiceProvider extends ServiceProvider
      */
     protected function configurePublishing()
     {
-        if (! $this->app->runningInConsole()) {
+        if (!$this->app->runningInConsole()) {
             return;
         }
 
@@ -112,22 +121,33 @@ class AdminFortifyServiceProvider extends ServiceProvider
             __DIR__ . '/../config/fortify.php' => config_path('admin_fortify.php'),
         ], 'admin-fortify-config');
 
-        if (! class_exists('CreateAdminsTable')) {
-            $this->publishes([
-                __DIR__ . '/../database/migrations/create_admins_table.php.stub' => database_path('migrations/' . date('Y_m_d_His', time()) . '_create_admins_table.php'),
-            ], 'admin-fortify-migrations');
+        $migrationFileNames = [
+            'create_admins_table',
+            'create_admin_login_log_table',
+        ];
+
+        $now = now();
+        foreach ($migrationFileNames as $migrationFileName) {
+            if (!$this->migrationFileExists($migrationFileName)) {
+                $this->publishes([
+                    $this->basePath("/../database/migrations/{$migrationFileName}.php.stub") => with($migrationFileName, function ($migrationFileName) use ($now) {
+                        $migrationPath = 'migrations/';
+
+                        if (Str::contains($migrationFileName, '/')) {
+                            $migrationPath .= Str::of($migrationFileName)->beforeLast('/')->finish('/');
+                            $migrationFileName = Str::of($migrationFileName)->afterLast('/');
+                        }
+
+                        return database_path($migrationPath . $now->addSecond()->format('Y_m_d_His') . '_' . Str::of($migrationFileName)->snake()->finish('.php'));
+                    }),
+                ], "{$this->shortName()}-migrations");
+            }
         }
 
-        if (! class_exists('CreateAdminLoginLogTable')) {
-            $this->publishes([
-                __DIR__ . '/../database/migrations/create_admin_login_log_table.php.stub' => database_path('migrations/' . date('Y_m_d_His', time()) . '_create_admin_login_log_table.php'),
-            ], 'admin-fortify-migrations');
-        }
-
-        if (! class_exists('SuperAdminSeeder')) {
+        if (!class_exists('SuperAdminSeeder')) {
             $this->publishes([
                 __DIR__ . '/../database/seeders/SuperAdminSeeder.php.stub' => database_path('seeders/SuperAdminSeeder.php'),
-            ], 'admin-fortify-seeders');
+            ], "{$this->shortName()}-seeders");
         }
     }
 
@@ -154,5 +174,51 @@ class AdminFortifyServiceProvider extends ServiceProvider
         $router = $this->app->make(Router::class);
         $router->aliasMiddleware('auth.admin', AdminAuthenticate::class);
         $router->aliasMiddleware('admin', RedirectIfAdminAuthenticated::class);
+    }
+
+    public function basePath(string $directory = null): string
+    {
+        if ($directory === null) {
+            return $this->basePath;
+        }
+
+        return $this->basePath . DIRECTORY_SEPARATOR . ltrim($directory, DIRECTORY_SEPARATOR);
+    }
+
+    public function setBasePath(string $path)
+    {
+        $this->basePath = $path;
+    }
+
+    public static function migrationFileExists(string $migrationFileName): bool
+    {
+        $migrationsPath = 'migrations/';
+
+        $len = strlen($migrationFileName) + 4;
+
+        if (Str::contains($migrationFileName, '/')) {
+            $migrationsPath .= Str::of($migrationFileName)->beforeLast('/')->finish('/');
+            $migrationFileName = Str::of($migrationFileName)->afterLast('/');
+        }
+
+        foreach (glob(database_path("${migrationsPath}*.php")) as $filename) {
+            if ((substr($filename, -$len) === $migrationFileName . '.php')) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public function shortName(): string
+    {
+        return Str::after($this->packageName, 'laravel-');
+    }
+
+    protected function getPackageBaseDir(): string
+    {
+        $reflector = new ReflectionClass(get_class($this));
+
+        return dirname($reflector->getFileName());
     }
 }
