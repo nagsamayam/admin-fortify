@@ -16,9 +16,20 @@ This is where your description should go. Limit it to a paragraph or two. Consid
 
 You can install the package via composer:
 
+Add below to your composer.json `repositories` array
+
+```bash
+{
+    "type": "vcs",
+    "url": "https://github.com/nagsamayam/admin-fortify"
+}
+```
+
 ```bash
 composer require nagsamayam/admin-fortify
 ```
+
+The package will automatically register itself.
 
 You can publish and run the migrations with:
 
@@ -37,15 +48,32 @@ You can publish the config file with:
 php artisan vendor:publish --provider="NagSamayam\AdminFortify\AdminFortifyServiceProvider" --tag="admin-fortify-config"
 ```
 
-This is the contents of the published config file:
 
-```php
-return [
-];
+## Usage
+
+Add below to your config/auth.php `guards` array
+
+```bash
+    'admin' => [
+        'driver' => 'session',
+        'provider' => 'admins',
+    ],
 ```
 
-## Usage(Will be added soon)
+Add below to your config/auth.php `providers` array
 
+```bash
+    'admins' => [
+        'driver' => 'eloquent',
+        'model' => NagSamayam\AdminFortify\Models\Admin::class,
+    ],
+```
+
+
+```bash
+php artisan migrate
+php artisan db:seed --class=SuperAdminSeeder
+```
 
 ## Testing
 
