@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use NagSamayam\AdminFortify\Models\Admin;
 
-class CreateAdminLoginLog extends Migration
+class CreateAdminLoginLogTable extends Migration
 {
     public function up()
     {
