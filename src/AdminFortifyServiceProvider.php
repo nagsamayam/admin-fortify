@@ -7,6 +7,7 @@ use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Str;
 use NagSamayam\AdminFortify\Actions\AttemptToAuthenticate;
 use NagSamayam\AdminFortify\Actions\RedirectIfTwoFactorAuthenticatable;
 use NagSamayam\AdminFortify\Commands\AdminFortifyCommand;
@@ -30,7 +31,6 @@ use NagSamayam\AdminFortify\Http\Responses\LogoutResponse;
 use NagSamayam\AdminFortify\Http\Responses\PasswordConfirmedResponse;
 use NagSamayam\AdminFortify\Http\Responses\TwoFactorLoginResponse;
 use NagSamayam\AdminFortify\Providers\EventServiceProvider;
-use Illuminate\Support\Str;
 use ReflectionClass;
 
 class AdminFortifyServiceProvider extends ServiceProvider
@@ -113,7 +113,7 @@ class AdminFortifyServiceProvider extends ServiceProvider
      */
     protected function configurePublishing()
     {
-        if (!$this->app->runningInConsole()) {
+        if (! $this->app->runningInConsole()) {
             return;
         }
 
@@ -128,7 +128,7 @@ class AdminFortifyServiceProvider extends ServiceProvider
 
         $now = now();
         foreach ($migrationFileNames as $migrationFileName) {
-            if (!$this->migrationFileExists($migrationFileName)) {
+            if (! $this->migrationFileExists($migrationFileName)) {
                 $this->publishes([
                     $this->basePath("/../database/migrations/{$migrationFileName}.php.stub") => with($migrationFileName, function ($migrationFileName) use ($now) {
                         $migrationPath = 'migrations/';
@@ -144,7 +144,7 @@ class AdminFortifyServiceProvider extends ServiceProvider
             }
         }
 
-        if (!class_exists('SuperAdminSeeder')) {
+        if (! class_exists('SuperAdminSeeder')) {
             $this->publishes([
                 __DIR__ . '/../database/seeders/SuperAdminSeeder.php.stub' => database_path('seeders/SuperAdminSeeder.php'),
             ], "{$this->shortName()}-seeders");
