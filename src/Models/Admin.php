@@ -18,6 +18,8 @@ class Admin extends Model
     use SoftDeletes;
     use TwoFactorAuthenticatable;
 
+    const TABLE_NAME = 'admins';
+
     protected $hidden = [
         'password',
         'remember_token',
