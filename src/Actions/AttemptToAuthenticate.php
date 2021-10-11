@@ -34,7 +34,6 @@ class AttemptToAuthenticate
             $request->only(Fortify::username(), 'password'),
             $request->filled('remember')
         )) {
-
             $admin = $request->user(config('admin_fortify.guard'));
             event(new Login($admin, $request->filled('remember')));
 
@@ -55,7 +54,7 @@ class AttemptToAuthenticate
     {
         $user = call_user_func(Fortify::$authenticateUsingCallback, $request);
 
-        if (!$user) {
+        if (! $user) {
             $this->fireFailedEvent($request);
 
             return $this->throwFailedAuthenticationException($request);
