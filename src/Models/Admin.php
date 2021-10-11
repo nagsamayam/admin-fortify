@@ -18,7 +18,7 @@ class Admin extends Authenticatable
     use SoftDeletes;
     use TwoFactorAuthenticatable;
 
-    const TABLE_NAME = 'admins';
+    public const TABLE_NAME = 'admins';
 
     protected $hidden = [
         'password',
