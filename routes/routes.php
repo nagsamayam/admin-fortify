@@ -27,7 +27,6 @@ Route::group(['middleware' => config('admin_fortify.middleware', ['web',])], fun
         ]));
 
     Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
-        ->middleware('auth.admin')
         ->name('admin.logout');
 
     // Profile Information...

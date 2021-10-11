@@ -83,7 +83,7 @@ class AuthenticatedSessionController extends Controller
      */
     public function destroy(Request $request): LogoutResponse
     {
-        $this->guard->logout();
+        $this->guard->logoutCurrentDevice();
 
         $request->session()->invalidate();
 
