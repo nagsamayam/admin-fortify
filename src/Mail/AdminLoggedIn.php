@@ -15,6 +15,7 @@ class AdminLoggedIn extends Mailable implements ShouldQueue
 
     public function __construct(public Admin $admin)
     {
+        //
     }
 
     /**

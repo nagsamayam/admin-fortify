@@ -9,6 +9,7 @@ use NagSamayam\AdminFortify\Contracts\FailedTwoFactorLoginResponse;
 use NagSamayam\AdminFortify\Contracts\TwoFactorChallengeViewResponse;
 use NagSamayam\AdminFortify\Contracts\TwoFactorLoginResponse;
 use NagSamayam\AdminFortify\Http\Requests\TwoFactorLoginRequest;
+use NagSamayam\AdminFortify\Events\Login;
 
 class TwoFactorAuthenticatedSessionController extends Controller
 {
@@ -44,6 +45,8 @@ class TwoFactorAuthenticatedSessionController extends Controller
         $this->guard->login($user, $request->remember());
 
         $request->session()->regenerate();
+
+        event(new Login($user, $request->remember()));
 
         return app(TwoFactorLoginResponse::class);
     }

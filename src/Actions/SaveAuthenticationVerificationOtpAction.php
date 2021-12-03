@@ -9,12 +9,14 @@ class SaveAuthenticationVerificationOtpAction
 {
     public function __construct(protected TwoFactorAuthenticationProvider $provider)
     {
+        //
     }
 
     public function __invoke(Admin $admin): Admin
     {
         $admin->forceFill([
             'otp' => encrypt($this->provider->generateOtp()),
+            'otp_sent_at' => now(),
         ])->save();
 
         return $admin;
