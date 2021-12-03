@@ -67,8 +67,6 @@ class TwoFactorLoginRequest extends FormRequest
     {
         $model = $guard->getProvider()->getModel();
 
-        dd($this->session()->has('admin_login.id'));
-
         return $this->session()->has('admin_login.id') &&
             $model::find($this->session()->get('admin_login.id'));
     }
