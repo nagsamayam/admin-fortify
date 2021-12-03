@@ -69,6 +69,57 @@ Add below to your config/auth.php `providers` array
     ],
 ```
 
+Create new file in app/Providers/AdminFortifyServiceProvider.php and add below content. Make sure view files exists
+
+```bash
+    <?php
+
+    namespace App\Providers;
+
+    use Illuminate\Http\Request;
+    use NagSamayam\AdminFortify\Fortify;
+    use Illuminate\Support\ServiceProvider;
+    use Illuminate\Cache\RateLimiting\Limit;
+    use Illuminate\Support\Facades\RateLimiter;
+
+    class AdminFortifyServiceProvider extends ServiceProvider
+    {
+        /**
+        * Register any application services.
+        *
+        * @return void
+        */
+        public function register()
+        {
+            
+        }
+
+        /**
+        * Bootstrap any application services.
+        *
+        * @return void
+        */
+        public function boot()
+        {
+
+            RateLimiter::for('admin-login', function (Request $request) {
+                return Limit::perMinute(3)->by($request->email . $request->ip())->response(function () {
+                    return back()->withErrors(['email' => 'Too many login attempts.',]);
+                });
+            });
+
+            RateLimiter::for('admin-two-factor', function (Request $request) {
+                return Limit::perMinute(3)->by($request->session()->get('login.id'));
+            });
+
+            Fortify::loginView(fn () => view('admin.auth.login'));
+
+            Fortify::twoFactorChallengeView(function () {
+                return view('admin.auth.two-factor-challenge');
+            });
+        }
+    }
+```
 
 ```bash
 php artisan migrate

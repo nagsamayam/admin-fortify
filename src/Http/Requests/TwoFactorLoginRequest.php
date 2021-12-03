@@ -51,11 +51,11 @@ class TwoFactorLoginRequest extends FormRequest
      *
      * @return bool
      */
-    public function hasValidCode()
+    public function hasValidCode(StatefulGuard $guard)
     {
         return $this->code &&
             app(TwoFactorAuthenticationProvider::class)
-            ->verify($this->challengedUser()->getOtp(), $this->code);
+            ->verify($this->challengedUser($guard)->getOtp(), $this->code);
     }
 
     /**
@@ -63,12 +63,14 @@ class TwoFactorLoginRequest extends FormRequest
      *
      * @return bool
      */
-    public function hasChallengedUser()
+    public function hasChallengedUser(StatefulGuard $guard)
     {
-        $model = app(StatefulGuard::class)->getProvider()->getModel();
+        $model = $guard->getProvider()->getModel();
 
-        return $this->session()->has('login.id') &&
-            $model::find($this->session()->get('login.id'));
+        dd($this->session()->has('admin_login.id'));
+
+        return $this->session()->has('admin_login.id') &&
+            $model::find($this->session()->get('admin_login.id'));
     }
 
     /**
@@ -76,13 +78,12 @@ class TwoFactorLoginRequest extends FormRequest
      *
      * @return mixed
      */
-    public function challengedUser()
+    public function challengedUser(StatefulGuard $guard)
     {
         if ($this->challengedUser) {
             return $this->challengedUser;
         }
-
-        $model = app(StatefulGuard::class)->getProvider()->getModel();
+        $model = $guard->getProvider()->getModel();
 
         if (
             ! $this->session()->has('admin_login.id') ||

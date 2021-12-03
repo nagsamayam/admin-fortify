@@ -28,7 +28,7 @@ class RedirectIfTwoFactorAuthenticatable
         $admin = $this->validateCredentials($request);
 
         if (
-            $admin?->is2faEnabled() &&
+            $admin?->hasEnabledTwoFactorAuthentication() &&
             in_array(TwoFactorAuthenticatable::class, class_uses_recursive($admin))
         ) {
             app(SendAuthenticationVerificationOtpAction::class)($admin);

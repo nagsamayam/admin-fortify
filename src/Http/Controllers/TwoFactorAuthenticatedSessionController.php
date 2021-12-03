@@ -35,9 +35,9 @@ class TwoFactorAuthenticatedSessionController extends Controller
      */
     public function store(TwoFactorLoginRequest $request)
     {
-        $user = $request->challengedUser();
+        $user = $request->challengedUser($this->guard);
 
-        if (! $request->hasValidCode()) {
+        if (! $request->hasValidCode($this->guard)) {
             return app(FailedTwoFactorLoginResponse::class);
         }
 
