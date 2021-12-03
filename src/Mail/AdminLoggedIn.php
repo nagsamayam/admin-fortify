@@ -25,7 +25,7 @@ class AdminLoggedIn extends Mailable implements ShouldQueue
      */
     public function build()
     {
-        return $this->subject(__('Login Notice'))
+        return $this->subject(ucfirst(request()->getHttpHost()) . ' Login Notice')
             ->markdown('adminFortify::emails.login-notice');
     }
 }
