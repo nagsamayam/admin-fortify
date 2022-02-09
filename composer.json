@@ -16,13 +16,13 @@
         }
     ],
     "require": {
-        "php": "^8.0",
+        "php": "^8.0|^8.1",
         "ext-json": "*",
-        "illuminate/contracts": "^8.58",
-        "illuminate/support": "^8.58",
+        "illuminate/contracts": "^8.58|^9.0",
+        "illuminate/support": "^8.58|^9.0",
         "jenssegers/agent": "^2.6",
         "spatie/data-transfer-object": "^3.7",
-        "spatie/laravel-package-tools": "^1.4.3"
+        "spatie/laravel-package-tools": "^1.11"
     },
     "require-dev": {
         "brianium/paratest": "^6.2",
